@@ -12,9 +12,8 @@ jobs:
         run: |
           $ref = '${{github.REF}}'
           $tag = $ref.Replace('refs/tags/', '')
-          $header = @{Authorization = 'Bearer ${{secrets.GITHUB_TOKEN}}'}
           $url = "https://api.github.com/repos/frg666/xunkong/releases/tags/$tag"
-          $r = Invoke-WebRequest $url -Headers $header
+          $r = Invoke-WebRequest $url
           $j = ConvertFrom-Json $r.Content
           New-Item -Path ./release -Type Directory -Force
           foreach($asset in $j.assets){
