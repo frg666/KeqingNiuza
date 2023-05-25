@@ -7,13 +7,7 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-
     steps:
-      - name: Config Ossutil
-        run: |
-          Invoke-WebRequest https://gosspublic.alicdn.com/ossutil/1.7.14/ossutil64.zip -OutFile ${{runner.temp}}/ossutil64.zip
-          Expand-Archive -Path ${{runner.temp}}/ossutil64.zip -DestinationPath ${{runner.temp}}
-          Move-Item -Path ${{runner.temp}}/ossutil64/ossutil64.exe -Destination C:/Windows/System32/ossutil.exe -Force
       - name: Download Releases
         run: |
           $ref = '${{github.REF}}'
