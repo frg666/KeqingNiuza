@@ -1,0 +1,26 @@
+name: Upload Releases to Oss
+
+on:
+  release:
+    types: [edited, prereleased, released]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Download Releases
+        run: |
+          $ref = '${{github.REF}}'
+          $tag = $ref.Replace('refs/tags/', '')
+          $url = "https://api.github.com/repos/frg666/xunkong/releases/tags/$tag"
+          $r = Invoke-WebRequest $url
+          $j = ConvertFrom-Json $r.Content
+          New-Item -Path ./release -Type Directory -Force
+          foreach($asset in $j.assets){
+            Write-Host $asset.browser_download_url
+            $name = [System.IO.Path]::GetFileName($asset.browser_download_url)
+            Invoke-WebRequest $asset.browser_download_url -OutFile "./release/$name" -Headers $header
+          }
+          foreach($file in Get-ChildItem "./release"){
+            Move-Item -Path $file.FullName -Destination "./release/Xunkong.Desktop.Package_latest_x64$($file.Extension)" -Force
+          }
