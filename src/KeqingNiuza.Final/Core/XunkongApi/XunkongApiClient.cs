@@ -51,7 +51,7 @@ namespace KeqingNiuza.Core.XunkongApi
 
         public async Task<IEnumerable<CharacterInfo>> GetCharacterInfosAsync()
         {
-            var url = $"https://api.xunkong.cc/v0.1/genshin/metadata/character";
+            var url = $"https://api.xunkong.cc/v1/genshindata/character";
             var result = await CommonGetAsync<MetadataDto<CharacterInfo>>(url);
             return result.List;
         }
@@ -59,7 +59,7 @@ namespace KeqingNiuza.Core.XunkongApi
 
         public async Task<IEnumerable<WeaponInfo>> GetWeaponInfosAsync()
         {
-            var url = $"https://api.xunkong.cc/v0.1/genshin/metadata/weapon";
+            var url = $"https://api.xunkong.cc/v1/genshindata/weapon";
             var result = await CommonGetAsync<MetadataDto<WeaponInfo>>(url);
             return result.List;
         }
@@ -67,7 +67,7 @@ namespace KeqingNiuza.Core.XunkongApi
 
         public async Task<IEnumerable<WishEventInfo>> GetWishEventInfosAsync()
         {
-            var url = $"https://api.xunkong.cc/v0.1/genshin/metadata/wishevent";
+            var url = $"https://api.xunkong.cc/v1/genshindata/wishevent";
             var result = await CommonGetAsync<MetadataDto<WishEventInfo>>(url);
             return result.List;
         }
