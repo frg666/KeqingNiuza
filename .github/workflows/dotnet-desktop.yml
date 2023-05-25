@@ -13,7 +13,7 @@ jobs:
           $ref = '${{github.REF}}'
           $tag = $ref.Replace('refs/tags/', '')
           $header = @{Authorization = 'Bearer ${{secrets.GITHUB_TOKEN}}'}
-          $url = "https://api.github.com/repos/xunkong/xunkong/releases/tags/$tag"
+          $url = "https://api.github.com/repos/frg666/xunkong/releases/tags/$tag"
           $r = Invoke-WebRequest $url -Headers $header
           $j = ConvertFrom-Json $r.Content
           New-Item -Path ./release -Type Directory -Force
